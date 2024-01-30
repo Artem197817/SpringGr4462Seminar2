@@ -40,4 +40,9 @@ public class UserRepository {
 
     //public void deleteById(int id)
     //"DELETE FROM userTable WHERE id=?"
+
+    public User update(User user){
+        save(user);
+        return user;
+    }
 }

@@ -4,8 +4,7 @@ import com.example.empl4sem2CRUD.model.User;
 import com.example.empl4sem2CRUD.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +35,13 @@ public class UserController {
     public String createUser(User user){
         userService.saveUser(user);
         return "redirect:/users";
+    }
+    @RequestMapping (value = "user-update/{id}", method = { RequestMethod.GET, RequestMethod.POST })
+    public String updateUser (User user, @PathVariable int id){
+        System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getId());
+       // userService.update(user);
+        return "user-update";
+
     }
 
     //@GetMapping("user-delete/{id}")
