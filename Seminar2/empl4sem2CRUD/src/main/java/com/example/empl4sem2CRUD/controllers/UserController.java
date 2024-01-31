@@ -17,32 +17,38 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String findAll(Model model){
+    public String findAll(Model model) {
         List<User> users = userService.findAll();
-
-
         model.addAttribute("users", users);
         return "user-list";
         //return "home.html";
     }
 
     @GetMapping("/user-create")
-    public String createUserForm(User user){
+    public String createUserForm(User user) {
         return "user-create";
     }
 
     @PostMapping("/user-create")
-    public String createUser(User user){
+    public String createUser(User user) {
         userService.saveUser(user);
         return "redirect:/users";
     }
-    @RequestMapping (value = "user-update/{id}", method = { RequestMethod.GET, RequestMethod.POST })
-    public String updateUser (User user, @PathVariable int id){
-        System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getId());
-       // userService.update(user);
-        return "user-update";
 
+    @GetMapping(value = "user-update/{id}")
+    public String updateUserForm(User user) {
+        return "user-update";
     }
 
-    //@GetMapping("user-delete/{id}")
+    @PostMapping("user-update")
+    public String updateUser(User user) {
+        userService.update(user);
+        return "redirect:/users";
+    }
+
+    @GetMapping("user-delete/{id}")
+    public String deleteUser(@PathVariable int id) {
+        userService.deleteById(id);
+        return "redirect:/users";
+    }
 }
