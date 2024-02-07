@@ -2,6 +2,9 @@ package com.example.empl4sem2CRUD.controllers;
 
 import com.example.empl4sem2CRUD.model.User;
 import com.example.empl4sem2CRUD.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Data
+@Log
+@AllArgsConstructor
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+
 
     @GetMapping("/users")
     public String findAll(Model model) {
